@@ -69,8 +69,9 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
             var json2 = JsonConvert.DeserializeObject<Dictionary<string, object>>(res2);
             if (json1["status"].Str() != "error" || json2["status"].Str() != "error")
             {
-                param.FrontIdImageUrl = json1["url"].Str().Replace("www.", "");
-                param.BackIdImageUrl = json2["url"].Str().Replace("www.", "");
+                //request.URLDocument = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                param.FrontIdImageUrl = (json1["url"].Str().Replace("www.", "")).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                param.BackIdImageUrl = json2["url"].Str().Replace("www.", "").Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
 
                 return (Results.Success, null);
             }

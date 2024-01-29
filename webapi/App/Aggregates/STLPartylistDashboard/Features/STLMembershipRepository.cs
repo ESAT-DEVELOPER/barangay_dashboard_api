@@ -334,8 +334,8 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid", account.PGRP_ID },
-                {"parmmvalfrmdt", request.DateFrom},
-                {"parmvaltodt", request.DateTo},
+                //{"parmmvalfrmdt", request.DateFrom},
+                //{"parmvaltodt", request.DateTo},
                 {"parmusrID", request.iUSR_ID},
                 {"parmoptrid",account.USR_ID }
             }).FirstOrDefault();

@@ -280,6 +280,18 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                 return Ok(new { result = result.result, message = result.message });
             return NotFound();
         }
+
+        [HttpPost]
+        [Route("dashboard/resetpassword")]
+        public async Task<IActionResult> Task0c1([FromBody] ResetGroupPassword request)
+        {
+            var result = await _repo.DashboardResetpasswordAsyn(request);
+            if (result.result == Results.Success)
+                return Ok(new { result = result.result, message = result.message });
+            if (result.result == Results.Failed)
+                return Ok(new { result = result.result, message = result.message });
+            return NotFound();
+        }
         [HttpPost]
         [Route("group/member/resetpassword")]
         public async Task<IActionResult> Task0cA([FromBody] ResetPassword request)

@@ -497,7 +497,7 @@ namespace webapi.Controllers.STLPartylistMembership.Features
                     return (Results.Success, null);
                 }
             }
-            return (Results.Null, "Make sure selected image is invalid");
+            return (Results.Null, "Make sure selected image is valid");
         }
 
         private async Task<(Results result, string message)> validity_exportdocument(DOD request)

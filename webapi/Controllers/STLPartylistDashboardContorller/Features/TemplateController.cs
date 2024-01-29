@@ -235,10 +235,31 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
         }
 
         [HttpPost]
+        [Route("licensetemplateforms/update")]
+        public async Task<IActionResult> Task0p1([FromBody] FormTemplate req)
+        {
+            var result = await _repo.FormLicenseTemplateAsync(req);
+            if (result.result == Results.Success)
+                return Ok(new { result = result.result, message = result.message, Content = req });
+            else if (result.result == Results.Failed)
+                return Ok(new { result = result.result, message = result.message });
+            return NotFound();
+        }
+
+        [HttpPost]
         [Route("templateforms")]
         public async Task<IActionResult> Task0q([FromBody] FormTemplate req)
         {
             var result = await _repo.Load_TemplateForm(req);
+            if (result.result == Results.Success)
+                return Ok(result.templateform);
+            return NotFound();
+        }
+        [HttpPost]
+        [Route("licensetemplateforms")]
+        public async Task<IActionResult> Task0q1([FromBody] FormTemplate req)
+        {
+            var result = await _repo.Load_LicenseTemplateForm(req);
             if (result.result == Results.Success)
                 return Ok(result.templateform);
             return NotFound();

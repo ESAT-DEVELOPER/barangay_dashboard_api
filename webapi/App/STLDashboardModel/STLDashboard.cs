@@ -45,7 +45,7 @@ namespace webapi.App.STLDashboardModel
     }
     public class AgentHeadOffice : HeadOffice
     {
-        
+
         //User Information
         public string parmusrfnm { get; set; }
         public string parmusrlnm { get; set; }
@@ -184,7 +184,7 @@ namespace webapi.App.STLDashboardModel
         public string DocContent;
         public string iDocRequirements;
     }
-    public class BarangayOfficial 
+    public class BarangayOfficial
     {
         public string Userid;
         public string BarangayPositionID;
@@ -215,7 +215,7 @@ namespace webapi.App.STLDashboardModel
         public string BusinessOwnerName;
         public string RequestorNM;
         public string RequestorID;
-        public List<String >Attachment;
+        public List<String> Attachment;
         public String iAttachments;
         public string CTCNo;
         public string ORNO;
@@ -369,6 +369,12 @@ namespace webapi.App.STLDashboardModel
         public string xml = null;
     }
 
+    public class Sitioreport
+    {
+        public string json = null;
+        public int type;
+    }
+
     public class DocumentStatistics
     {
         public int type;
@@ -425,7 +431,7 @@ namespace webapi.App.STLDashboardModel
         public string ClaimDate;
         public string ProcessBy;
         public string ProcessDate;
-	    public string ReleaseDate;
+        public string ReleaseDate;
     }
 
     public class BrgyClearance
@@ -457,6 +463,39 @@ namespace webapi.App.STLDashboardModel
         public string AppointmentDate;
         public string ExportedDocument;
         public string URLDocument;
+    }
+    public class cCommunity
+    {
+        public string CommunityID;
+        public string CommunityName;
+        public string CommunityDescription;
+        public int TypeLevel;
+        public string ScopeLevelDescription;
+        public string ScopeLevelDescriptionVal;
+    }
+    public class cPostCommunity
+    {
+        public string PostID;
+        public string PostTitle;
+        public string PostDescription;
+        public string base64Attachment;
+        public string URL;
+        public string ImgURL;
+        public string CommunityID;
+    }
+    public class cCommentPostCommunity
+    {
+        public string CommunityID;
+        public string PostID;
+        public string CommentID;
+        public string Reason;
+    }
+    public class AcptCommunity
+    {
+        public string PL_ID;
+        public string PGRP_ID;
+        public string CommunityID;
+        public int RequestStatus;
     }
 
     public class DOD

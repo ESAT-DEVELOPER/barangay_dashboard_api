@@ -25,15 +25,15 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
         Task<(Results result, object household)> GetStatisticalData(StatisticalData data);
         Task<(Results result, object household)> GetStatisticalData02(StatisticalData data);
 
-        Task<(Results result, object statistics)> GetStatistics0100(string xml);
+        Task<(Results result, object statistics)> GetStatistics0100(Sitioreport data);//---//
         Task<(Results result, object statistics)> GetStatistics0200(int type, string code);
 
-        Task<(Results result, object statistics)> GetStatistics01A01(string xml);
-        Task<(Results result, object statistics)> GetStatistics01A02(string xml);
-        Task<(Results result, object statistics)> GetStatistics01A03(string xml);
-        Task<(Results result, object statistics)> GetStatistics01A04(string xml);
-        Task<(Results result, object statistics)> GetStatistics01A05(string xml);
-        Task<(Results result, object statistics)> GetStatistics01A06(string xml);
+        Task<(Results result, object statistics)> GetStatistics01A01(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01A02(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01A03(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01A04(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01A05(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01A06(Sitioreport data);//---/
 
         Task<(Results result, object statistics)> GetStatistics02A01(int type1, int type2, string code);
         Task<(Results result, object statistics)> GetStatistics02A02(int type1, int type2, string code);
@@ -43,10 +43,10 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
         Task<(Results result, object statistics)> GetStatistics02A06(int type1, int type2, string code);
 
 
-        Task<(Results result, object statistics)> GetStatistics01B01(string xml);
-        Task<(Results result, object statistics)> GetStatistics01B02(string xml);
-        Task<(Results result, object statistics)> GetStatistics01B03(string xml);
-        Task<(Results result, object statistics)> GetStatistics01B04(string xml);
+        Task<(Results result, object statistics)> GetStatistics01B01(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01B02(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01B03(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01B04(Sitioreport data);//---/
 
         Task<(Results result, object statistics)> GetStatistics02B01(int type1, int type2, string code);
         Task<(Results result, object statistics)> GetStatistics02B02(int type1, int type2, string code);
@@ -54,25 +54,25 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
         Task<(Results result, object statistics)> GetStatistics02B04(int type1, int type2, string code);
 
 
-        Task<(Results result, object statistics)> GetStatistics01C01(string xml);
-        Task<(Results result, object statistics)> GetStatistics01C02(string xml);
-        Task<(Results result, object statistics)> GetStatistics01C03(string xml);
-        Task<(Results result, object statistics)> GetStatistics01C04(string xml);
+        Task<(Results result, object statistics)> GetStatistics01C01(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01C02(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01C03(Sitioreport data);//---/
+        Task<(Results result, object statistics)> GetStatistics01C04(Sitioreport data);//---/
 
         Task<(Results result, object statistics)> GetStatistics02C01(int type1, int type2, string code);
         Task<(Results result, object statistics)> GetStatistics02C02(int type1, int type2, string code);
         Task<(Results result, object statistics)> GetStatistics02C03(int type1, int type2, string code);
         Task<(Results result, object statistics)> GetStatistics02C04(int type1, int type2, string code);
 
-        Task<(Results result, object data)> MaximizedControl01lvl01(string xml, int type);
+        Task<(Results result, object data)> MaximizedControl01lvl01(Sitioreport data);//---/
         Task<(Results result, object data)> MaximizedControl02lvl01(int loctype, string code, int type);
-        Task<(Results result, object data)> MaximizedControl01lvl03(string xml, int type);
+        Task<(Results result, object data)> MaximizedControl01lvl03(Sitioreport data);//---/
         Task<(Results result, object data)> MaximizedControl02lvl03(int loctype, string code, int type);
 
         Task<(Results result, object household)> DynamicReportData(Report report);
 
         Task<(Results result, object household)> GetComplaints(string from, string to);
-        Task<(Results result, object household)> GetOrgs(string xml);
+        Task<(Results result, object household)> GetOrgs(Sitioreport data);//---/
 
         Task<(Results result, object household)> GetPreferences(ReportSettings settings);
 
@@ -164,13 +164,13 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics0100(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics0100(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_00", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
@@ -192,78 +192,78 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
 
         
         // A1
-        public async Task<(Results result, object statistics)> GetStatistics01A01(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01A01(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_A01", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01A02(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01A02(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_A02", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01A03(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01A03(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_A03", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01A04(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01A04(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_A04", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01A05(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01A05(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_A05", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01A06(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01A06(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_A06", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
@@ -354,52 +354,52 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
 
         //B1
 
-        public async Task<(Results result, object statistics)> GetStatistics01B01(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01B01(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_B01", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01B02(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01B02(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_B02", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01B03(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01B03(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_B03", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01B04(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01B04(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_B04", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
@@ -462,51 +462,51 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
         // End of B2
         // C1
 
-        public async Task<(Results result, object statistics)> GetStatistics01C01(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01C01(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_C01", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01C02(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01C02(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_C02", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
-        public async Task<(Results result, object statistics)> GetStatistics01C03(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01C03(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_C03", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object statistics)> GetStatistics01C04(string xml)
+        public async Task<(Results result, object statistics)> GetStatistics01C04(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_C04", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID },
                 {"parmpgrpid",account.PGRP_ID },
-                {"parmxml", xml },
+                {"parmxml", data.json },
             });
             if (results != null)
                 return (Results.Success, results);
@@ -566,16 +566,16 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object data)> MaximizedControl01lvl01(string xml, int type)
+        public async Task<(Results result, object data)> MaximizedControl01lvl01(Sitioreport data)
         {
-            switch(type)
+            switch(data.type)
             {
                 case 1:
                     var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_A01", new Dictionary<string, object>()
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results != null)
@@ -587,7 +587,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results2 != null)
@@ -599,7 +599,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results3 != null)
@@ -611,7 +611,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results4 != null)
@@ -623,7 +623,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results5 != null)
@@ -635,7 +635,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results6 != null)
@@ -720,16 +720,16 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                 default: return (Results.Null, null);
             }
         }
-        public async Task<(Results result, object data)> MaximizedControl01lvl03(string xml, int type)
+        public async Task<(Results result, object data)> MaximizedControl01lvl03(Sitioreport data)
         {
-            switch (type)
+            switch (data.type)
             {
                 case 1:
                     var results = _repo.DSpQuery<dynamic>($"dbo.spfn_STATISTICS_01_C01", new Dictionary<string, object>()
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results != null)
@@ -741,7 +741,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results2 != null)
@@ -753,7 +753,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results3 != null)
@@ -765,7 +765,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                     {
                         {"parmplid",account.PL_ID },
                         {"parmpgrpid",account.PGRP_ID },
-                        {"parmxml", xml },
+                        {"parmxml", data.json },
                         {"parmtype", 2 },
                     });
                     if (results4 != null)
@@ -867,14 +867,14 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
             return (Results.Null, null);
         }
 
-        public async Task<(Results result, object household)> GetOrgs(string xml)
+        public async Task<(Results result, object household)> GetOrgs(Sitioreport data)
         {
             var results = _repo.DSpQuery<dynamic>($"dbo.spfn_REPORTINGorgz", new Dictionary<string, object>()
             {
                 //{"parmplid",account.PL_ID },
                 {"parmplid", account.PL_ID },
                 {"parmpgrpid", account.PGRP_ID},
-                {"parmxml", xml },
+                {"parmxml", data.json },
 
 
             });

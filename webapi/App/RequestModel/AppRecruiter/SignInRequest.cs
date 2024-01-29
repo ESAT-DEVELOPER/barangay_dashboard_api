@@ -47,4 +47,9 @@ namespace webapi.App.RequestModel.AppRecruiter
         public string Messagetype;
         public string MessageRead;
     }
+    public class FetchLoadNews
+    {
+        public string category;
+        public string jsonnews;
+    }
 }

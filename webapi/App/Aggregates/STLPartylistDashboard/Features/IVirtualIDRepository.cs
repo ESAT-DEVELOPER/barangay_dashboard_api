@@ -10,6 +10,7 @@ using webapi.App.Model.User;
 using webapi.Commons.AutoRegister;
 using Microsoft.AspNetCore.Mvc;
 using webapi.App.STLDashboardModel;
+using webapi.App.Features.UserFeature;
 
 namespace webapi.App.Aggregates.STLPartylistDashboard.Features
 {
@@ -45,6 +46,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                 string ResultCode = row["RESULT"].Str();
                 if (ResultCode == "1")
                 {
+                    await Generate_Virtual_ID(row, detail, account.PL_ID, account.PGRP_ID, detail.UserId);
                     return (Results.Success, "Successfully save");
                 }
                 else if (ResultCode == "0")
@@ -57,6 +59,14 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                 }
             }
             return (Results.Null, null);
+        }
+        public async Task<bool> Generate_Virtual_ID(IDictionary<string, object> row, object content, string plid, string pgrpid, string userid)
+        {
+            //var settings = STLSubscriberDto.GetGroup(row);
+            var notifications = SubscriberDto.VirtualIDNofitication(row);
+            await Pusher.PushAsync($"/{plid}/{pgrpid}/{userid}/virtualid"
+                , new { type = "virtualid", content = content });
+            return false;
         }
     }
 }

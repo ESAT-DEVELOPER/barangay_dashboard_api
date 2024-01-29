@@ -84,7 +84,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
             if (request.APK_File.Str().IsEmpty())
                 return (Results.Success, null);
 
-            var resApp = ApkUploader.SendAsync("app", request.APKVerno, request.APK_File).Result;
+            var resApp = ApkUploader.SendAsync("app", $"{request.APKVerno}_{request.PL_ID}{request.PGRP_ID}", request.APK_File).Result;
             var data = JsonConvert.DeserializeObject<dynamic>(resApp);
             if(data.status == "success")
             {

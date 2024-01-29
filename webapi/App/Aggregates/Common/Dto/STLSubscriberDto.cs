@@ -809,6 +809,274 @@ namespace webapi.App.Aggregates.Common.Dto
         }
 
 
+        public static IEnumerable<dynamic> GetAllCommunityList(IEnumerable<dynamic> data, string userid = "", int limit = 100, bool fullinfo = true)
+        {
+            if (data == null) return null;
+            var items = GetAllCommunity_List(data);
+            var count = items.Count();
+            //if (count >= limit)
+            //{
+            //    var o = items.Last();
+            //    var filter = (o.NextFilter = Dynamic.Object);
+            //    items = items.Take(count - 1).Concat(new[] { o });
+            //    filter.NextFilter = o.num_row;
+            //    filter.Userid = userid;
+            //}
+            return items;
+        }
+        public static IEnumerable<dynamic> GetAllCommunity_List(IEnumerable<dynamic> data, bool fullinfo = true)
+        {
+            if (data == null) return null;
+            return data.Select(e => Get_AllCommunity_List(e));
+        }
+        public static IDictionary<string, object> Get_AllCommunity_List(IDictionary<string, object> data, bool fullinfo = true)
+        {
+            dynamic o = Dynamic.Object;
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            o.num_row = data["Num_Row"].Str();
+            o.Subscriber = data["PLTCL_NM"].Str();
+            o.PL_ID = data["PL_ID"].Str();
+            o.PGRP_ID = data["PGRP_ID"].Str();
+            o.CommunityID = data["COMM_ID"].Str();
+            o.CommunityName = data["COMM_NM"].Str();
+            o.CommunityDescription = data["COMM_DESC"].Str();
+            o.TypeLevel = data["TYP_LVL"].Str();
+            o.ScopeLevelDescription = data["SCOPE_LVL_DESCR"].Str();
+            o.isStatus = Convert.ToBoolean(data["isSTATUS"]);
+            o.isActive = Convert.ToBoolean(data["isActive"]);
+            o.RequestStatus = Convert.ToBoolean(data["REQ_STATUS"]);
+            o.RequestDate = data["RequestDate"].Str();
+            o.Requestor = data["FLL_NM"].Str();
+            o.RegionCode = data["LOC_REG"].Str();
+            o.ProvinceCode = data["LOC_PROV"].Str();
+            o.MunicipalityCode = data["LOC_MUN"].Str();
+            o.BarangayCode = data["LOC_BRGY"].Str();
+            o.SitioCode = data["LOC_SIT"].Str();
+            if (data["PostCount"].Str() == "0")
+                o.PostCount = "";
+            else
+            {
+                o.PostCount = (data["PostCount"].Str() == "1") ? data["PostCount"].Str() + " post" : data["PostCount"].Str() + " posts";
+            }
+            
+            //o.isLeader = Convert.ToBoolean(data["isLeader"].Str());
+            return o;
+        }
+
+        public static IEnumerable<dynamic> GetAllPostCommunityList(IEnumerable<dynamic> data, string userid = "", int limit = 100, bool fullinfo = true)
+        {
+            if (data == null) return null;
+            var items = GetAllPostCommunity_List(data);
+            var count = items.Count();
+            //if (count >= limit)
+            //{
+            //    var o = items.Last();
+            //    var filter = (o.NextFilter = Dynamic.Object);
+            //    items = items.Take(count - 1).Concat(new[] { o });
+            //    filter.NextFilter = o.num_row;
+            //    filter.Userid = userid;
+            //}
+            return items;
+        }
+        public static IEnumerable<dynamic> GetAllPostCommunity_List(IEnumerable<dynamic> data, bool fullinfo = true)
+        {
+            if (data == null) return null;
+            return data.Select(e => Get_AllPostCommunity_List(e));
+        }
+        public static IDictionary<string, object> Get_AllPostCommunity_List(IDictionary<string, object> data, bool fullinfo = true)
+        {
+            dynamic o = Dynamic.Object;
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            o.num_row = data["Num_Row"].Str();
+            o.PL_ID = data["PL_ID"].Str();
+            o.PGRP_ID = data["PGRP_ID"].Str();
+            o.CommunityID = data["COMM_ID"].Str();
+            o.CommunityName = data["COMM_NM"].Str();
+            o.CommunityDescription = data["COMM_DESC"].Str();
+            o.PostID = data["POST_ID"].Str();
+            o.PostTitle = data["POST_TTL"].Str();
+            o.PostDescription = data["POST_DESC"].Str();
+            o.URL = data["IMG_CONTENT"].Str();
+            o.isInActive = Convert.ToBoolean(data["isInActive"]);
+            o.CreatedDate = data["CreatedDate"].Str();
+            o.TypeLevel = data["TYP_LVL"].Str();
+            o.TypeLevelDescription = data["Typ_Level_Desc"].Str();
+            o.Total_Comment = (data["Total_Comment"].Str() == "0") ? "" : (Convert.ToInt32(data["Total_Comment"]) > 1) ? data["Total_Comment"].Str() + " " + "Comment" : data["Total_Comment"].Str() + " " + "Comments";
+            o.Total_Like = (Convert.ToInt32(data["Total_Like"]) == 0) ? "" : data["Total_Like"].Str();
+            o.Total_disLike = (Convert.ToInt32(data["Total_disLike"]) == 0) ? "" : data["Total_disLike"].Str();
+            return o;
+        }
+
+
+        public static IEnumerable<dynamic> GetAllCommentPostCommunityList(IEnumerable<dynamic> data, string userid = "", int limit = 100, bool fullinfo = true)
+        {
+            if (data == null) return null;
+            var items = GetAllCommentPostCommunity_List(data);
+            var count = items.Count();
+            //if (count >= limit)
+            //{
+            //    var o = items.Last();
+            //    var filter = (o.NextFilter = Dynamic.Object);
+            //    items = items.Take(count - 1).Concat(new[] { o });
+            //    filter.NextFilter = o.num_row;
+            //    filter.Userid = userid;
+            //}
+            return items;
+        }
+        public static IEnumerable<dynamic> GetAllCommentPostCommunity_List(IEnumerable<dynamic> data, bool fullinfo = true)
+        {
+            if (data == null) return null;
+            return data.Select(e => Get_AllCommentPostCommunity_List(e));
+        }
+        public static IDictionary<string, object> Get_AllCommentPostCommunity_List(IDictionary<string, object> data, bool fullinfo = true)
+        {
+            dynamic o = Dynamic.Object;
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            o.num_row = data["Num_Row"].Str();
+            o.CommenterName = data["CommenterName"].Str();
+            o.CommenterMobileNumber = data["CommenterMobileNumber"].Str();
+            o.CommenterImage = data["CommenterImage"].Str();
+            o.CommunityID = data["COMM_ID"].Str();
+            o.PostID = data["POST_ID"].Str();
+            o.USR_ID = data["USR_ID"].Str();
+            o.CommentID = data["CMN_ID"].Str();
+            o.CommentLevel = data["COMN_LVL"].Str();
+            o.CommentDescription = data["CMN_DESCRIPTION"].Str();
+            o.Total_Like = (Convert.ToInt32(data["Total_Like"]) > 0) ? data["Total_Like"].Str(): "";
+            o.Total_disLike = (Convert.ToInt32(data["Total_disLike"]) > 0) ? data["Total_disLike"].Str() : "";
+            o.Post_Date = data["Post_Date"].Str();
+            o.Post_Time = Get_Time(Convert.ToDateTime(data["Post_Date"]));
+            o.Reason = data["Reason"].Str();
+            o.isRemove = Convert.ToBoolean(data["isREMOVE"]);
+            return o;
+        }
+
+        public static string Get_Time(DateTime Post_Date)
+        {
+            //string strtime = string.Empty;
+            var milliseconds = DateTime.Now.Subtract(Post_Date);
+            var d = milliseconds.Days;
+            var h = milliseconds.Hours;
+            var mi = milliseconds.Minutes;
+            var ss = milliseconds.Seconds;
+            var mls = milliseconds.Milliseconds;
+            if(d == 0 && h == 0 && mi == 0 && ss > 0)
+            {
+                if (ss == 1)
+                    return ss + " second ago";
+                return ss + " seconds ago";
+            }
+            else if(d == 0 && h == 0 && mi < 60)
+            {
+                if (mi == 1)
+                    return mi + " minute ago";
+                return mi + " minutes ago";
+            }
+            else if(d == 0 && h < 24)
+            {
+                if (h == 1)
+                    return h + " hour ago";
+                return h + " hours ago";
+            }
+            else if (d >= 1) //days
+            {
+                if (d == 1)
+                    return d + " day ago";
+                else if(d > 1 && d < 365)
+                {
+                    if (d < 30)
+                        return d + " days ago";
+                    var dd = d / 30;
+                    if(dd == 1)
+                    {
+                        return "1 month ago";
+                    }
+                    else if(dd > 1 && dd <= 12)
+                    {
+                        return dd + " months ago";
+                    }
+                }
+                else
+                {
+                    var dd = d / 365;
+                    if (dd == 1)
+                        return "1 year ago";
+                    else
+                        return dd + " years ago";
+                }
+            }
+            return "1 second ago";
+
+            /*
+            //var dtime = milliseconds;
+            decimal dtime = Convert.ToDecimal(milliseconds.Ticks);
+            //double today_date = DateTime.Now.ToOADate();
+            //double d_postdate = Post_Date.ToOADate();
+            //double dtime = double.Parse(milliseconds);
+            //double dtime = today_date - d_postdate;
+            if(Math.Floor(dtime / 1000) < 60) //second
+            {
+                if(Math.Floor(dtime / 1000) == 1)
+                {
+                    strtime = "1 second ago";
+                    return strtime;
+                }
+                strtime = (Math.Floor(dtime / 1000)).Str() + " seconds ago";
+                return strtime;
+            }
+            else if (Math.Floor(dtime / 1000 / 60) < 60) //minute
+            {
+                if (Math.Floor(dtime / 1000 / 60) == 1)
+                {
+                    strtime = "1 minute ago";
+                    return strtime;
+                }
+                strtime = (Math.Floor(dtime / 1000 / 60)).Str() + " minutes ago";
+                return strtime;
+            }
+            else if (Math.Floor(dtime / 1000 / 60 / 60) < 24) //hours
+            {
+                if (Math.Floor(dtime / 1000 / 60 / 60) == 1)
+                {
+                    strtime = "1 hour ago";
+                    return strtime;
+                }
+                strtime = (Math.Floor(dtime / 1000 / 60 / 60)).Str() + " hours ago";
+                return strtime;
+            }
+            else if (Math.Floor(dtime / 1000 / 60 / 60 /24) > 1 || Math.Floor(dtime / 1000 / 60 / 60 / 24) < 30) //days
+            {
+                if (Math.Floor(dtime / 1000 / 60 / 60 /24) == 1)
+                {
+                    strtime = "1 day ago";
+                    return strtime;
+                }
+                strtime = (Math.Floor(dtime / 1000 / 60 / 60 / 24)).Str() + " days ago";
+                return strtime;
+            }
+            else if (Math.Floor(dtime / 1000 / 60 / 60 / 24 / 30) < 12) //month
+            {
+                if (Math.Floor(dtime / 1000 / 60 / 60 / 24 / 30) == 1)
+                {
+                    strtime = "1 month ago";
+                    return strtime;
+                }
+                strtime = (Math.Floor(dtime / 1000 / 60 / 60 / 24 /30)).Str() + " months ago";
+                return strtime;
+            }
+            else //year
+            {
+                if (Math.Floor(dtime / 1000 / 60 / 60 / 24 / 30 /12) == 1)
+                {
+                    strtime = "1 year ago";
+                    return strtime;
+                }
+                strtime = (Math.Floor(dtime / 1000 / 60 / 60 / 24 / 30 /12)).Str() + " years ago";
+                return strtime;
+            }
+            */
+        }
+
         public static IEnumerable<dynamic> GetAllEmergencyContactPersonList(IEnumerable<dynamic> data, string userid = "", int limit = 100, bool fullinfo = true)
         {
             if (data == null) return null;

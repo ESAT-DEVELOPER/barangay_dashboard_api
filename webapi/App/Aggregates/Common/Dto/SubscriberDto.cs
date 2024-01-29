@@ -231,6 +231,7 @@ namespace webapi.App.Aggregates.Common
             o.LicenseVal = data["LICENSE_VAL"].Str();
             o.Date_Register = (data["DT_REGISTERED"].Str() == "") ? "" : Convert.ToDateTime(data["DT_REGISTERED"].Str()).ToString("MMMM dd, yyyy");
             o.License_Expiry = (data["LICENSE_EXPIRY"].Str() == "") ? "" : Convert.ToDateTime(data["LICENSE_EXPIRY"].Str()).ToString("MMMM dd, yyyy");
+            //o.License_Expiry = data["LICENSE_EXPIRY"].Str();
             o.Registered_Device = data["REGISTERED_DEVICE"].Str();
             o.Registered_MCAddress = data["REGISTERED_MCADDRESS"].Str();
             o.Extension = data["EXTN_LOC_NO"].Str();
@@ -310,6 +311,7 @@ namespace webapi.App.Aggregates.Common
             o.BarangayCode = (data["BARANGAY_CODE"].Str() == "") ? "" : data["BARANGAY_CODE"].Str();
             o.isExpired = Convert.ToInt32(data["isExpired"]);
             o.LocalNo = data["EXTN_LOC_NO"].Str();
+            o.McAddress = data["REGISTERED_MCADDRESS"].Str();
             return o;
         }
 
@@ -382,10 +384,14 @@ namespace webapi.App.Aggregates.Common
         public static IDictionary<string, object> GetBrgy_List(IDictionary<string, object> data, bool fullinfo = true)
         {
             dynamic o = Dynamic.Object;
+            o.Region_Code = data["REGION_CODE"].Str();
+            o.Province_Code = data["PROVINCE_CODE"].Str();
+            o.Municipality_Code = data["MUNICIPALITY_CODE"].Str();
             o.Code = data["BRGY_CODE"].Str();
             o.Name = data["BRGY"].Str();
             return o;
         }
+
 
         public static IEnumerable<dynamic> GetGroupLeaderAccount(IEnumerable<dynamic> data)
         {
@@ -1274,6 +1280,13 @@ namespace webapi.App.Aggregates.Common
                 o.FulldateDisplay = $"{o.DateDisplay} {o.TimeDisplay}";
             }
             catch { }
+            return o;
+        }
+        public static IDictionary<string, object> VirtualIDNofitication(IDictionary<string, object> data)
+        {
+            dynamic o = Dynamic.Object;
+            o.FrontIdImageUrl = data["FrontIdImageUrl"].Str();
+            o.BackIdImageUrl = data["BackIdImageUrl"];
             return o;
         }
 

@@ -26,6 +26,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
         Task<(Results result, object ldr)> SiteLeader1(string plid, string pgrpid, string usrid, string num_row, string search);
         Task<(Results result, String message)> MemberAsysnc(STLMembership mem, bool isUpdate = false);
         Task<(Results result, String message)> ResetpasswordAsyn(ResetGroupPassword request);
+        Task<(Results result, String message)> DashboardResetpasswordAsyn(ResetGroupPassword request);
         Task<(Results result, String message)> TransferMember(TransferMember request);
         Task<(Results result, String message)> TransferAllMember(TransferMember request);
         Task<(Results result, object act)> AllAccount();
@@ -141,9 +142,31 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                 {"parmplid",request.PL_ID },
                 {"parmpgrpid",request.PGRP_ID },
                 {"parmoptrid",account.USR_ID },
-                {"parmcompagnt",request.isAgent },
+                //{"parmcompagnt",request.isAgent },
                 {"@parmtrgtid",request.USR_ID },
-                {"@parmusrpsswrd",request.NewPassword }
+                //{"@parmusrpsswrd",request.NewPassword }
+            }).FirstOrDefault();
+            if (result != null)
+            {
+                var row = ((IDictionary<string, object>)result);
+                var ResultCode = row["RESULT"].Str();
+                if (ResultCode == "1")
+                    return (Results.Success, "Successfully saved!");
+                return (Results.Failed, "Something wrong in your data, Please try again!");
+            }
+            return (Results.Null, null);
+        }
+
+        public async Task<(Results result, string message)> DashboardResetpasswordAsyn(ResetGroupPassword request)
+        {
+            var result = _repo.DSpQuery<dynamic>($"spfn_BUDBO0COP", new Dictionary<string, object>()
+            {
+                {"parmplid",request.PL_ID },
+                {"parmpgrpid",request.PGRP_ID },
+                {"parmoptrid",account.USR_ID },
+                //{"parmcompagnt",request.isAgent },
+                {"@parmtrgtid",request.USR_ID },
+                //{"@parmusrpsswrd",request.NewPassword }
             }).FirstOrDefault();
             if (result != null)
             {

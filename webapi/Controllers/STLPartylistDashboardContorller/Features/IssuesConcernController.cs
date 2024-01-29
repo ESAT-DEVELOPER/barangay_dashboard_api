@@ -36,7 +36,15 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
             return NotFound();
         }
 
-
+        [HttpPost]
+        [Route("report/problem/ticketno")]
+        public async Task<IActionResult> Task08([FromBody] FilterRequest request)
+        {
+            var result = await _supRepo.LoadIssuesConcernTickectNo(request);
+            if (result.result == Results.Success)
+                return Ok(result.concern);
+            return NotFound();
+        }
 
         [HttpPost]
         [Route("report/problem/attachment")]

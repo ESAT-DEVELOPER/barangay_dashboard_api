@@ -70,9 +70,9 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("reporting/statisticspopulation01")]
-        public async Task<IActionResult> Statisticspopulation01(string xml)
+        public async Task<IActionResult> Statisticspopulation01([FromBody] Sitioreport data)//------
         {
-            var result = await _repo.GetStatistics0100(xml);
+            var result = await _repo.GetStatistics0100(data);
             if (result.result == Results.Success)
                 return Ok(result.statistics);
             return NotFound();
@@ -90,14 +90,14 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("reporting/statistics01lvl1")]
-        public async Task<IActionResult> GetStatistics0101(string xml)
+        public async Task<IActionResult> GetStatistics0101([FromBody] Sitioreport data)//------
         {
-            var seniorcitizen = await _repo.GetStatistics01A01(xml);
-            var pwd = await _repo.GetStatistics01A02(xml);
-            var indigent = await _repo.GetStatistics01A03(xml);
-            var voter = await _repo.GetStatistics01A04(xml);
-            var organization = await _repo.GetStatistics01A05(xml);
-            var occupation = await _repo.GetStatistics01A06(xml);
+            var seniorcitizen = await _repo.GetStatistics01A01(data);
+            var pwd = await _repo.GetStatistics01A02(data);
+            var indigent = await _repo.GetStatistics01A03(data);
+            var voter = await _repo.GetStatistics01A04(data);
+            var organization = await _repo.GetStatistics01A05(data);
+            var occupation = await _repo.GetStatistics01A06(data);
           
             return Ok(new { Results.Success
                             ,seniorcitizen = seniorcitizen.statistics
@@ -140,12 +140,12 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("reporting/statistics01lvl2")]
-        public async Task<IActionResult> GetStatistics0102(string xml)
+        public async Task<IActionResult> GetStatistics0102([FromBody] Sitioreport data)//------
         {
-            var disability = await _repo.GetStatistics01B01(xml);
-            var precinct = await _repo.GetStatistics01B02(xml);
-            var organization = await _repo.GetStatistics01B03(xml);
-            var occupation = await _repo.GetStatistics01B04(xml);
+            var disability = await _repo.GetStatistics01B01(data);
+            var precinct = await _repo.GetStatistics01B02(data);
+            var organization = await _repo.GetStatistics01B03(data);
+            var occupation = await _repo.GetStatistics01B04(data);
 
             return Ok(new
             {
@@ -182,12 +182,12 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("reporting/statistics01lvl3")]
-        public async Task<IActionResult> GetStatistics0103(string xml)
+        public async Task<IActionResult> GetStatistics0103([FromBody] Sitioreport data)//------
         {
-            var gender = await _repo.GetStatistics01C01(xml);
-            var status = await _repo.GetStatistics01C02(xml);
-            var agebracket = await _repo.GetStatistics01C03(xml);
-            var bloodtype = await _repo.GetStatistics01C04(xml);
+            var gender = await _repo.GetStatistics01C01(data);
+            var status = await _repo.GetStatistics01C02(data);
+            var agebracket = await _repo.GetStatistics01C03(data);
+            var bloodtype = await _repo.GetStatistics01C04(data);
 
             return Ok(new
             {
@@ -224,9 +224,9 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("reporting/maximizedcontrol01lvl01")]
-        public async Task<IActionResult> MaximizedControl01lvl01(string xml, int type)
+        public async Task<IActionResult> MaximizedControl01lvl01([FromBody] Sitioreport data)//------
         {
-            var result = await _repo.MaximizedControl01lvl01(xml, type);
+            var result = await _repo.MaximizedControl01lvl01(data);
             if (result.result == Results.Success)
                 return Ok(result.data);
             return NotFound();
@@ -255,9 +255,9 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("reporting/maximizedcontrol01lvl03")]
-        public async Task<IActionResult> MaximizedControl01lvl03(string xml, int type)
+        public async Task<IActionResult> MaximizedControl01lvl03([FromBody] Sitioreport data)//------
         {
-            var result = await _repo.MaximizedControl01lvl03(xml, type);
+            var result = await _repo.MaximizedControl01lvl03(data);
             if (result.result == Results.Success)
                 return Ok(result.data);
             return NotFound();
@@ -285,9 +285,9 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("reporting/reportOrgs")]
-        public async Task<IActionResult> ShowOrgs(string xml)
+        public async Task<IActionResult> ShowOrgs([FromBody] Sitioreport data)//------
         {
-            var result = await _repo.GetOrgs(xml);
+            var result = await _repo.GetOrgs(data);
             if (result.result == Results.Success)
                 return Ok(result.household);
             return NotFound();

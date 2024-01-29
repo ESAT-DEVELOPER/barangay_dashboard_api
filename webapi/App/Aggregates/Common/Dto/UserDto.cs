@@ -8,21 +8,25 @@ namespace webapi.App.Aggregates.Common
 {
     public class UserDto
     {
-        public static Subscriber Subscriber(IDictionary<string, object> data){
+        public static Subscriber Subscriber(IDictionary<string, object> data)
+        {
             Subscriber o = new Subscriber();
             string result = data["RESULT"].Str();
             string usertype = data["USR_TYP"].Str();
-            if(result == "52"){ 
+            if (result == "52")
+            {
                 o.OTPCode = data["OTP"].Str();
                 o.MobileNumber = data["MOB_NO"].Str().Replace("+63", "0");
-            }else if(result == "1"){
+            }
+            else if (result == "1")
+            {
                 o.SubscriberID = data["USR_ID"].Str();
                 o.GroupID = data["GRP_CD"].Str();
                 o.AccountID = data["ACT_ID"].Str();
-                o.ImageUrl =  data["IMG_URL"].Str();
-                o.DisplayName =  data["NCK_NM"].Str();
-                o.PresentAddress =  data["PRSNT_ADD"].Str();
-                o.BirthDate =  data["BRT_DT"].Str();
+                o.ImageUrl = data["IMG_URL"].Str();
+                o.DisplayName = data["NCK_NM"].Str();
+                o.PresentAddress = data["PRSNT_ADD"].Str();
+                o.BirthDate = data["BRT_DT"].Str();
                 o.PasswordExpired = data["PSSWRD_EXP_TS"].Str();
                 //
                 o.IsGeneralCoordinator = (usertype.Equals("1"));
@@ -30,29 +34,32 @@ namespace webapi.App.Aggregates.Common
                 o.IsPlayer = (usertype.Equals("3"));
                 // 
                 o.MobileNumber = data["MOB_NO"].Str();
-                o.EmailAddress = data["EML_ADD"].Str(); 
+                o.EmailAddress = data["EML_ADD"].Str();
 
                 o.CreditBalance = data["ACT_CRDT_BAL"].Str().ToDecimalDouble();
-                if(o.IsGeneralCoordinator||o.IsCoordinator){
+                if (o.IsGeneralCoordinator || o.IsCoordinator)
+                {
                     o.CommissionBalance = data["ACT_COM_BAL"].Str().ToDecimalDouble();
                     o.CommissionRate = data["ACT_COM_RT"].Str().ToDecimalDouble();
                 }
                 o.IsReseller = (data["S_RSLR"].Str().Equals("1"));
                 var winbal = data["ACT_WIN_BAL"].Str().ToDecimalDouble();
-                if(winbal>0) o.WinningBalance = winbal;
+                if (winbal > 0) o.WinningBalance = winbal;
 
                 o.IsProduction = (data["S_PRD"].Str().Equals("1"));
                 o.IsBlocked = (data["IS_BLCK"].Str().Equals("1"));
-                o.LastLogIn = data["LST_LOG_IN"].Str(); 
+                o.LastLogIn = data["LST_LOG_IN"].Str();
                 o.SessionID = data["SSSN_ID"].Str().ToLower();
 
                 string gencoor = data["REF_ACT_ID1"].Str().Trim();
-                if(!gencoor.IsEmpty()){
+                if (!gencoor.IsEmpty())
+                {
                     o.GeneralCoordinator = data["REF_ACT_NM1"].Str().Trim();
                     o.GeneralCoordinatorID = gencoor;
                 }
                 string coor = data["REF_ACT_ID2"].Str().Trim();
-                if(!coor.IsEmpty()){
+                if (!coor.IsEmpty())
+                {
                     o.Coordinator = data["REF_ACT_NM2"].Str().Trim();
                     o.CoordinatorID = coor;
                 }
@@ -66,10 +73,11 @@ namespace webapi.App.Aggregates.Common
             return o;
         }
 
-        
-        public static IDictionary<string, object> Subscriber(Subscriber user){
+
+        public static IDictionary<string, object> Subscriber(Subscriber user)
+        {
             dynamic o = Dynamic.Object;
-            
+
             o.AccountID = user.AccountID;
             o.ImageUrl = user.ImageUrl;
             o.Firstname = user.Firstname;
@@ -80,28 +88,33 @@ namespace webapi.App.Aggregates.Common
             o.MobileNumber = user.MobileNumber;
             o.EmailAddress = user.EmailAddress;
             o.PresentAddress = user.PresentAddress;
-            o.BirthDate = user.BirthDate;  
+            o.BirthDate = user.BirthDate;
             //
             o.CreditBalance = user.CreditBalance;
-            if(user.IsGeneralCoordinator||user.IsCoordinator){
+            if (user.IsGeneralCoordinator || user.IsCoordinator)
+            {
                 o.CommissionBalance = user.CommissionBalance;
                 o.CommissionRate = user.CommissionRate;
             }
-            if(user.WinningBalance>0) o.WinningBalance = user.WinningBalance;
-            if(user.IsReseller) o.IsReseller = user.IsReseller;
-            if(user.IsGeneralCoordinator) o.IsGeneralCoordinator = user.IsGeneralCoordinator;
-            if(user.IsCoordinator) o.IsCoordinator = user.IsCoordinator;
-            if(user.IsPlayer) o.IsPlayer = user.IsPlayer;
+            if (user.WinningBalance > 0) o.WinningBalance = user.WinningBalance;
+            if (user.IsReseller) o.IsReseller = user.IsReseller;
+            if (user.IsGeneralCoordinator) o.IsGeneralCoordinator = user.IsGeneralCoordinator;
+            if (user.IsCoordinator) o.IsCoordinator = user.IsCoordinator;
+            if (user.IsPlayer) o.IsPlayer = user.IsPlayer;
             //
 
-            if(user.IsCoordinator){
-                if(!user.GeneralCoordinator.IsEmpty()){
+            if (user.IsCoordinator)
+            {
+                if (!user.GeneralCoordinator.IsEmpty())
+                {
                     o.Upline = user.GeneralCoordinator;
                     o.UplineID = user.GeneralCoordinatorID;
                 }
             }
-            if(user.IsPlayer){
-                if(!user.Coordinator.IsEmpty()){
+            if (user.IsPlayer)
+            {
+                if (!user.Coordinator.IsEmpty())
+                {
                     o.Upline = user.Coordinator;
                     o.UplineID = user.CoordinatorID;
                 }
@@ -111,7 +124,8 @@ namespace webapi.App.Aggregates.Common
             //
             return o;
         }
-        public static IDictionary<string, object> PreSubscriber(Subscriber user){
+        public static IDictionary<string, object> PreSubscriber(Subscriber user)
+        {
             dynamic o = Dynamic.Object;
 
             o.Firstname = user.Firstname;
@@ -126,10 +140,11 @@ namespace webapi.App.Aggregates.Common
 
 
 
-        public static Operator WebOperator(IDictionary<string, object> data){
+        public static Operator WebOperator(IDictionary<string, object> data)
+        {
             Operator o = new Operator();
             string usertype = data["USR_TYP"].Str().Trim();
-            
+
             o.Firstname = data["FRST_NM"].Str().ToUpper();
             o.Lastname = data["LST_NM"].Str().ToUpper();
             o.Fullname = data["FLL_NM"].Str().ToUpper();
@@ -137,7 +152,7 @@ namespace webapi.App.Aggregates.Common
             o.CompanyID = data["COMP_ID"].Str();
             o.BranchID = data["BR_CD"].Str();
             o.OperatorID = data["USR_ID"].Str();
-            
+
             o.PresentAddress = data["PRSNT_ADDR"].Str();
             o.EmailAddress = data["EML_ADD"].Str();
             o.MobileNumber = data["MOB_NO"].Str();
@@ -157,8 +172,9 @@ namespace webapi.App.Aggregates.Common
         }
 
 
-        
-        public static IDictionary<string, object> WebOperator(Operator user){
+
+        public static IDictionary<string, object> WebOperator(Operator user)
+        {
             dynamic o = Dynamic.Object;
             o.Firstname = user.Firstname;
             o.Lastname = user.Lastname;
@@ -167,18 +183,18 @@ namespace webapi.App.Aggregates.Common
             o.CompanyID = user.CompanyID;
             o.BranchID = user.BranchID;
             //o.OperatorID = user.Fullname;
-            
+
             o.PresentAddress = user.PresentAddress;
             o.EmailAddress = user.EmailAddress;
             o.MobileNumber = user.MobileNumber;
 
-            if(user.IsCompanyAgent) o.IsCompanyAgent = user.IsCompanyAgent;
-            if(user.IsBranchAgent) o.IsBranchAgent = user.IsBranchAgent;
-            if(user.IsInAccounting) o.IsInAccounting = user.IsInAccounting;
-            if(user.IsInTreasury) o.IsInTreasury = user.IsInTreasury;
-            if(user.IsInOperations) o.IsInOperations = user.IsInOperations;
-            if(user.IsInAccounts) o.IsInAccounts = user.IsInAccounts;
-            if(user.IsInOperationHead) o.IsInOperationHead = user.IsInOperationHead;
+            if (user.IsCompanyAgent) o.IsCompanyAgent = user.IsCompanyAgent;
+            if (user.IsBranchAgent) o.IsBranchAgent = user.IsBranchAgent;
+            if (user.IsInAccounting) o.IsInAccounting = user.IsInAccounting;
+            if (user.IsInTreasury) o.IsInTreasury = user.IsInTreasury;
+            if (user.IsInOperations) o.IsInOperations = user.IsInOperations;
+            if (user.IsInAccounts) o.IsInAccounts = user.IsInAccounts;
+            if (user.IsInOperationHead) o.IsInOperationHead = user.IsInOperationHead;
 
             return o;
         }

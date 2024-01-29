@@ -38,6 +38,10 @@ namespace webapi.App.RequestModel.Common
         public string EmgyID;
         public string EmgyTypID;
         public string EmgyContactID;
+        public string TickectNo;
+        public string CommunityID;
+        public string PostID;
+        public int TypeLevel;
 
         public DateTime? TransactionDt;
         public DateTime? FromDt;
