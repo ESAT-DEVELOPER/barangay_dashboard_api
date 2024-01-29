@@ -578,5 +578,26 @@ namespace webapi.App.STLDashboardModel
         public string FrontIdImageUrl;
         public string BackIdImageUrl;
     }
+
+    public class Biometrics
+    {
+        public string RegisteredID;
+        public List<string> Fingerprints;
+        public string SearchFingerprint;
+        public string FingerprintPosition;
+    }
+
+    public class Article
+    {
+        public string Category;
+        public string Publisher;
+        public string Author;
+        public string Title;
+        public string Description;
+        public string Url;
+        public string ImgUrl;
+        public string DateTimePublished;
+        public string DatePublished;
+    }
 }
 
