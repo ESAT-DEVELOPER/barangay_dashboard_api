@@ -50,6 +50,9 @@
 
 
   <ItemGroup>
+    <Reference Include="Innovatrics.Enrollment">
+      <HintPath>..\..\..\..\Download\Inovatrics\Innovatrics.Enrollment.dll</HintPath>
+    </Reference>
     <Reference Include="Ultralight, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion> 
       <HintPath>.\obj\plugin\Ultralight\Ultralight.dll</HintPath>

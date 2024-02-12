@@ -131,9 +131,10 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
                 foreach (var item in (dynamic)reg_fingerprints)
                 {
+
                     foreach (var print in item.fingerprints)
                     {
-                        if(print == null) continue;
+                        if (print == null) continue;
                         SaveImageFile(print);
 
                         string first = AppDomain.CurrentDomain.BaseDirectory + @"fingerprint\SEARCH_FINGERPRINT.png";
@@ -232,7 +233,12 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin.");
                 var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
                 if (json["status"].Str() != "error")
-                    tempList.Add(json["url"].Str().Replace("www.", ""));
+                {
+                    string url = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
+                    tempList.Add(url);
+                    //tempList.Add(json["url"].Str().Replace("www.", ""));
+                }
+                    
             }
             request.Fingerprints = null;
             request.Fingerprints = tempList;

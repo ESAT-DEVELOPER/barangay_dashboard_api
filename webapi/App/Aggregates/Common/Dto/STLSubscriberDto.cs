@@ -847,6 +847,7 @@ namespace webapi.App.Aggregates.Common.Dto
             o.RequestStatus = Convert.ToBoolean(data["REQ_STATUS"]);
             o.RequestDate = data["RequestDate"].Str();
             o.Requestor = data["FLL_NM"].Str();
+            o.ApprovedDate = data["APPROVED_DT"].Str();
             o.RegionCode = data["LOC_REG"].Str();
             o.ProvinceCode = data["LOC_PROV"].Str();
             o.MunicipalityCode = data["LOC_MUN"].Str();

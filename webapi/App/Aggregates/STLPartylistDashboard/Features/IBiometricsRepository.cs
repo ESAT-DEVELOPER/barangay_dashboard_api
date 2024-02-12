@@ -42,7 +42,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
 
         public async Task<(Results status, string message)> biometricsRegistration(Biometrics info)
         {
-            var result = _repo.DSpQuery<dynamic>($"FINGERPRINT_TEST.dbo.spfn_ADDFINGERREG", new Dictionary<string, object>()
+            var result = _repo.DSpQuery<dynamic>($"dbo.spfn_ADDFINGERREG", new Dictionary<string, object>()
             {
                 {"parmplid",account.PL_ID},
                 {"parmpgrpid",account.PGRP_ID},
@@ -78,7 +78,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
         {
             try
             {
-                var result = _repo.DSpQuery<dynamic>($"FINGERPRINT_TEST.dbo.spfn_READFINGERPRINTS", new Dictionary<string, object>()
+                var result = _repo.DSpQuery<dynamic>($"dbo.spfn_READFINGERPRINTS", new Dictionary<string, object>()
                 {
                     {"parmplid",account.PL_ID },
                     {"parmpgrpid",account.PGRP_ID },
