@@ -17,7 +17,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
     [Service.ITransient(typeof(MobileVerificationRepository))]
     public interface IMobileVerificationRepository
     {
-        Task<(Results result, string message)> approveMobileVerification(string userid);
+        Task<(Results result, string message)> approveMobileVerification(string userid, int approve);
         Task<(Results result, object articles)> getMobileVerficationList(string userid, string date);
     }
     public class MobileVerificationRepository : IMobileVerificationRepository
@@ -31,11 +31,12 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
             _repo = repo;
         }
 
-        public async Task<(Results result, string message)> approveMobileVerification(string userid)
+        public async Task<(Results result, string message)> approveMobileVerification(string userid,int approve)
         {
             var result = _repo.DSpQuery<dynamic>($"dbo.spfn_UPDVRFYACNT", new Dictionary<string, object>()
             {
-                {"parmusrid", userid}
+                {"parmusrid", userid},
+                {"parmapprove", approve}
             }).FirstOrDefault();
             if (result != null)
             {
@@ -47,7 +48,7 @@ namespace webapi.App.Aggregates.STLPartylistDashboard.Features
                 }
                 else if (ResultCode == "0")
                 {
-                    return (Results.Failed, "Article already exist");
+                    return (Results.Failed, "Account does'nt exist!");
                 }
                 else if (ResultCode == "2")
                 {

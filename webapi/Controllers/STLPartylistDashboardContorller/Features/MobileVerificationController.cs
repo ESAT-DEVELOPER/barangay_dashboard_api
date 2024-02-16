@@ -30,9 +30,9 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
 
         [HttpPost]
         [Route("mobile/verification/approve")]
-        public async Task<IActionResult> uploadArticle(string userid)
+        public async Task<IActionResult> approveMobileVerification(string userid, int isApproved)
         {
-            var result = await _repo.approveMobileVerification(userid);
+            var result = await _repo.approveMobileVerification(userid,isApproved);
             if (result.result == Results.Success)
                 return Ok(new { result = result.result, message = result.message });
             else if (result.result == Results.Failed)
