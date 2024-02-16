@@ -144,7 +144,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                 var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
                 if(json["status"].Str() != "error")
                 {
-                    req.URL = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                    req.URL = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                     req.ImgURL = req.URL;
                     return (Results.Success, null);
                 }

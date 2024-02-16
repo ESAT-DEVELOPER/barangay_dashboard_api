@@ -123,7 +123,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     {
                         //dictionary.Add(item.Index, json["url"].Str().Replace("www.", ""));
                         //string url = json["url"].Str();
-                        string url = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                        string url = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
 
                         sb.Append($"<item OFFICIAL_ID=\"{item.ELECTED_OFFICIAL_ID}\" BRGY_POSITION=\"{item.BRGY_POSITION}\" ELECTED_OFFICIAL=\"{item.ELECTED_OFFICIAL}\" COMMITTEE=\"{item.COMMITTEE}\" SIGNATURE_URL=\"{url}\"/>");
                         //request.GovIDList[i] = url;
@@ -172,7 +172,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsoncapt = JsonConvert.DeserializeObject<Dictionary<string, object>>(rescapt);
                 if (jsoncapt["status"].Str() != "error")
-                    request.Brgy_Captain_sig_URL = jsoncapt["url"].Str();
+                    request.Brgy_Captain_sig_URL = (jsoncapt["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
             if (!request.Brgy_FirstCouncilor.IsEmpty() && !request.Brgy_FirstCouncilor_sig.IsEmpty())
             {
@@ -187,7 +187,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                         return (Results.Failed, "Please contact to admin");
                     var jsonfirst = JsonConvert.DeserializeObject<Dictionary<string, object>>(resfirst);
                     if (jsonfirst["status"].Str() != "error")
-                        request.Brgy_FirstCouncilor_sig_URL = jsonfirst["url"].Str();
+                        request.Brgy_FirstCouncilor_sig_URL = (jsonfirst["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                 }
                 
             }
@@ -205,7 +205,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                         return (Results.Failed, "Please contact to admin");
                     var jsonsecond = JsonConvert.DeserializeObject<Dictionary<string, object>>(ressecond);
                     if (jsonsecond["status"].Str() != "error")
-                        request.Brgy_SecondCouncilor_sig_URL = jsonsecond["url"].Str();
+                        request.Brgy_SecondCouncilor_sig_URL = (jsonsecond["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                 }
             }
 
@@ -222,7 +222,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                         return (Results.Failed, "Please contact to admin");
                     var jsonthird = JsonConvert.DeserializeObject<Dictionary<string, object>>(resthird);
                     if (jsonthird["status"].Str() != "error")
-                        request.Brgy_ThirdCouncilor_sig_URL = jsonthird["url"].Str();
+                        request.Brgy_ThirdCouncilor_sig_URL = (jsonthird["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                 }
                 
             }
@@ -238,7 +238,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsonfourth = JsonConvert.DeserializeObject<Dictionary<string, object>>(resfourth);
                 if (jsonfourth["status"].Str() != "error")
-                    request.Brgy_FourthCouncilor_sig_URL = jsonfourth["url"].Str();
+                    request.Brgy_FourthCouncilor_sig_URL = (jsonfourth["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
 
             if (!request.Brgy_FifthCouncilor.IsEmpty() && !request.Brgy_FifthCouncilor_sig.IsEmpty())
@@ -252,7 +252,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsonfifth = JsonConvert.DeserializeObject<Dictionary<string, object>>(resfifth);
                 if (jsonfifth["status"].Str() != "error")
-                    request.Brgy_FifthCouncilor_sig_URL = jsonfifth["url"].Str();
+                    request.Brgy_FifthCouncilor_sig_URL = (jsonfifth["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
 
             if (!request.Brgy_SixthCouncilor.IsEmpty() && !request.Brgy_SixthCouncilor_sig.IsEmpty())
@@ -266,7 +266,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsonsixth = JsonConvert.DeserializeObject<Dictionary<string, object>>(ressixth);
                 if (jsonsixth["status"].Str() != "error")
-                    request.Brgy_SixthCouncilor_sig_URL = jsonsixth["url"].Str();
+                    request.Brgy_SixthCouncilor_sig_URL = (jsonsixth["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
 
             if (!request.Brgy_SeventhCouncilor.IsEmpty() && !request.Brgy_SeventhCouncilor_sig.IsEmpty())
@@ -280,7 +280,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsonseventh = JsonConvert.DeserializeObject<Dictionary<string, object>>(resseventh);
                 if (jsonseventh["status"].Str() != "error")
-                    request.Brgy_SeventhCouncilor_sig_URL = jsonseventh["url"].Str();
+                    request.Brgy_SeventhCouncilor_sig_URL = (jsonseventh["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
 
             if (!request.SK_Chairman.IsEmpty() && !request.SK_Chairman_sig.IsEmpty())
@@ -294,7 +294,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsonskchairman = JsonConvert.DeserializeObject<Dictionary<string, object>>(resskchairman);
                 if (jsonskchairman["status"].Str() != "error")
-                    request.SK_Chairman_sig_URL = jsonskchairman["url"].Str();
+                    request.SK_Chairman_sig_URL = (jsonskchairman["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
             if (!request.Brgy_Secretary.IsEmpty() && !request.Brgy_Secretary_sig.IsEmpty())
             {
@@ -307,7 +307,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsonsecretary = JsonConvert.DeserializeObject<Dictionary<string, object>>(ressecretary);
                 if (jsonsecretary["status"].Str() != "error")
-                    request.Brgy_Secretary_sig_URL = jsonsecretary["url"].Str();
+                    request.Brgy_Secretary_sig_URL = (jsonsecretary["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
             if (!request.Brgy_Treasurer.IsEmpty() && !request.Brgy_Treasurer_sig.IsEmpty())
             {
@@ -320,7 +320,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsontreasurer = JsonConvert.DeserializeObject<Dictionary<string, object>>(restreasurer);
                 if (jsontreasurer["status"].Str() != "error")
-                    request.Brgy_Treasurer_sig_URL = jsontreasurer["url"].Str();
+                    request.Brgy_Treasurer_sig_URL = (jsontreasurer["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
             if (!request.Brgy_Chief_Tanod.IsEmpty() && !request.Brgy_Chief_Tanod_sig.IsEmpty())
             {
@@ -333,7 +333,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                     return (Results.Failed, "Please contact to admin");
                 var jsontanod = JsonConvert.DeserializeObject<Dictionary<string, object>>(restanod);
                 if (jsontanod["status"].Str() != "error")
-                    request.Brgy_Chief_Tanod_sig_URL = jsontanod["url"].Str();
+                    request.Brgy_Chief_Tanod_sig_URL = (jsontanod["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
             }
             
             if(!request.Brgy_Captain_sig_URL.IsEmpty() ||

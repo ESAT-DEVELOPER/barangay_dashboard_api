@@ -119,7 +119,7 @@ namespace webapi.Controllers.STLPartylistMembership.Features
             if (json["status"].Str() != "error")
             {
                 //request.URLDocument = json["url"].Str();
-                request.URLDocument = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                request.URLDocument = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                 return (Results.Success, null);
             }
             return (Results.Null, "Make sure you have internet connection.");
@@ -452,7 +452,7 @@ namespace webapi.Controllers.STLPartylistMembership.Features
                 if (json["status"].Str() != "error")
                 {
                     //request.SignatureURL = json["url"].Str();
-                    request.SignatureURL = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                    request.SignatureURL = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                     return (Results.Success, null);
                 }
             }
@@ -493,7 +493,7 @@ namespace webapi.Controllers.STLPartylistMembership.Features
                 if (json["status"].Str() != "error")
                 {
                     //request.ImageUrl = json["url"].Str();
-                    request.ImageUrl = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                    request.ImageUrl = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                     return (Results.Success, null);
                 }
             }
@@ -517,7 +517,7 @@ namespace webapi.Controllers.STLPartylistMembership.Features
             if (json["status"].Str() != "error")
             {
                 //request.URLDocument = json["url"].Str();
-                request.URLDocument = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                request.URLDocument = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                 return (Results.Success, null);
             }
             return (Results.Null, "Make sure you have internet connection.");
@@ -553,7 +553,7 @@ namespace webapi.Controllers.STLPartylistMembership.Features
                         var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
                         if (json["status"].Str() != "error")
                             //dictionary.Add(item.Index, json["url"].Str().Replace("www.", ""));
-                            dictionary.Add(item.Index, json["url"].Str().Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()));
+                            dictionary.Add(item.Index, json["url"].Str().Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http"));
                     }
                     
                 }
@@ -592,7 +592,7 @@ namespace webapi.Controllers.STLPartylistMembership.Features
                     {
                         //dictionary.Add(item.Index, json["url"].Str().Replace("www.", ""));
                         //string url = json["url"].Str();
-                        string url = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                        string url = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                         sb.Append($"<governemntid GOVVAL_ID=\"{item.govvalid}\" GOVVAL_ID_NO=\"{item.govvalid_no}\" ATTACHMENT=\"{url}\" />");
                         //request.GovIDList[i] = url;
                     }

@@ -155,7 +155,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
             if(json["status"].Str() != "error")
             {
                 //request.URLDocument = json["url"].Str();
-                request.URLDocument = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                request.URLDocument = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                 return (Results.Success, null);
             }
             return (Results.Null, "Make sure you have internet connection.");

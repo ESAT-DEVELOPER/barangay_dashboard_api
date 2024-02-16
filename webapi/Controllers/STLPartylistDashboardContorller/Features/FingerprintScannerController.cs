@@ -95,7 +95,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                         return (Results.Failed, "Please contact to admin.");
                     var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
                     if (json["status"].Str() != "error")
-                        dictionary.Add(item.Index, json["url"].Str().Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()));
+                        dictionary.Add(item.Index, json["url"].Str().Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http"));
                 }
                 else
                     dictionary.Add(item.Index, null);

@@ -105,7 +105,7 @@ namespace webapi.Controllers.STLPartylistDashboardContorller.Features
                 if (json["status"].Str() != "error")
                 {
                     //request.Company_Logo = json["url"].Str();
-                    request.Company_Logo = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str());
+                    request.Company_Logo = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                     return (Results.Success, null);
                 }
             }

@@ -88,7 +88,7 @@ namespace webapi.Controllers.SubscriberAppControllers.Features
             var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
             if (json["status"].Str() != "error")
             {
-                request.MemorandumURL = json["url"].Str();
+                request.MemorandumURL = (json["url"].Str()).Replace(_config["Portforwarding:LOCAL"].Str(), _config["Portforwarding:URL"].Str()).Replace("https", "http");
                 return (Results.Success, null);
             }
             return (Results.Null, "Make sure selected image is invalid");
